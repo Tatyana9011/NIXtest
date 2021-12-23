@@ -1,32 +1,29 @@
 // eslint-disable-next-line strict
 'use strict';
 
-const mispelled = (str1, str2) => {
-
+const solve = str => {
+  const newStr = str.toLowerCase();
   let count = 0;
 
-  for (let i = 0; i < str1.length; i++) {
-
-    if (str1[i] === str2[i] || str1[i] === str2[i + 1] || str1[i + 1] === str2[i]) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] >= newStr[i]) {
       count++;
     }
-
   }
 
-  if (count === str1.length || count === str2.length ||
-    count === str1.length - 1 || count === str2.length - 1) {
-    return true;
+  if (count >= (str.length / 2)) {
+    str = str.toLowerCase();
   } else {
-    return false;
+    str = str.toUpperCase();
   }
 
+  return str;
 };
 
-console.log('mispelled => true', mispelled('versed', 'xersed'));
-console.log('mispelled => false: ', mispelled('versed', 'applb'));
-console.log('mispelled=> true: ', mispelled('versed', 'v5rsed'));
-console.log('mispelled => true: ', mispelled('1versed', 'versed'));
-console.log('mispelled => true ', mispelled('versed', 'versed1'));
-console.log('mispelled => true ', mispelled('versed', 'aversed'));
-console.log('mispelled => false: ', mispelled('aaversed', 'versed'));
-console.log('mispelled => false ', mispelled('versed', 'aaversed'));
+console.log('=>code', solve('code'));
+console.log('=>CODE', solve('CODe'));
+console.log('=>code', solve('COde'));
+console.log('=>code', solve('Code'));
+
+
+
