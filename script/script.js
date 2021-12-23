@@ -1,49 +1,66 @@
 // eslint-disable-next-line strict
 'use strict';
 
-const solve = str => {
-  const match = str.match(/[+*/-]/g);
-  const obj = {};
-  let start = 0;
-  let and = 0;
-  const arr = [];
+const mispelled = (str1, str2) => {
+  console.log('str1, str2: ', str1, str2);
+  let count = 0;
+  let obj = {};
 
-  for (let i = 0; i < match.length; i++) {
-    obj[match[i]] = str.indexOf(match[i]);
-  }
-  //заполняем массив
-  for (const key in obj) {
+  for (let i = 0; i < str1.length; i++) {
 
-    if (and !== 0) {
-      start = and + 1;
-    }
-    and = obj[key];
-    arr.push(str.substring(start, and));
+
+
 
   }
 
-  start = and + 1;
-  arr.push(str.substring(start, str.length));
 
-  match.reverse();//переворачиваем масивы
 
-  arr.reverse();
 
-  arr.forEach((item, i) => {  //заполняем заново в павильном поядке
 
-    if (match[i]) {
-      arr[i] = item + match[i];
+  /* 
+    if (str1.length + 1 <= str2.length || str1.length >= str2.length + 1) {
+      //str1.match(str2);count++;
+      if (!str1.match(str2) || !str2.match(str1)) {
+        console.log('----------str1: ', str1);
+        count++;
+      } else {
+        const match = str1.match(str2);
+        console.log('-----------------match: ', match.index);
+      }
     }
-
-  });
-
-  return arr.join('');
+  
+    for (let i = 0; i < str1.length; i++) {
+  
+      if (str1[i] !== str2[i]) {
+  
+        count++;
+        if (str1[i] !== str2[i + 1]) {
+          count++;
+        } else {
+          count--;
+        }
+      }
+    }
+  
+  
+  
+  
+    if (count === 0 || count === 1) {
+      if (str1.length === str2.length || str1.length + 1 === str2.length || str1.length === str2.length + 1) {
+        return true;
+      } else if (str1.length + 1 <= str2.length || str1.length >= str2.length + 1) {
+        return false;
+      }
+    } else {
+      return false;
+    } */
 };
 
-
-console.log("y/b*100", solve("100*b/y"));
-
-console.log("30*d/c-b+a", solve("a+b-c/d*30"));
-
-console.log("50+c/b*a", solve("a*b/c+50"));
-
+console.log('mispelled => true', mispelled('versed', 'xersed'));
+console.log('mispelled => false: ', mispelled('versed', 'applb'));
+console.log('mispelled=> true: ', mispelled('versed', 'v5rsed'));
+console.log('mispelled => true: ', mispelled('1versed', 'versed'));
+console.log('mispelled => true ', mispelled('versed', 'versed1'));
+console.log('mispelled => true ', mispelled('versed', 'aversed'));
+console.log('mispelled => false: ', mispelled('aaversed', 'versed'));
+console.log('mispelled => false ', mispelled('versed', 'aaversed'));
