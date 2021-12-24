@@ -1,19 +1,22 @@
 // eslint-disable-next-line strict
 'use strict';
 
-const daysRepresented = arr => {
-  let days = 0;
+const checkPassword = password => {
+  let validate = '';
+  const regexp = new RegExp(/([a-z]{1,})\w{1,}[!|@|#|$|%|^|&|*]{1,}[a-z]?/gi);
+  const result = password.match(regexp);
 
-  arr.forEach(item => {
-    days += (item[1] - item[0]);
-  });
-
-  return days + arr.length;
+  if (password.length >= 8 && password.length <= 20 && result) {
+    validate = 'valid';
+  } else {
+    validate = 'not valid';
+  }
+  return validate;
 };
 
-console.log('=> 17==', daysRepresented([[10, 15], [25, 35]]));
-console.log(' =>24 ==', daysRepresented([[2, 8], [220, 229], [10, 16]]));
-console.log('=> 16==', daysRepresented([[13, 20], [86, 93]]));
-console.log('=> 9==', daysRepresented([[1, 2], [8, 10], [12, 15]]));
-console.log(' =>22==', daysRepresented([[2, 8], [10, 16], [19, 26]]));
-
+console.log('=> not valid==', checkPassword(""));
+console.log(' =>not valid ==', checkPassword("password"));
+console.log('=> not valid==', checkPassword("P1@p"));
+console.log('=> valid==', checkPassword("P1@pP1@p"));
+console.log(' =>not valid==', checkPassword("P1@pP1@pP1@pP1@pP1@pP1@p"));
+console.log('  => valid ==', checkPassword("Paaaaaa222!!!"));
