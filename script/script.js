@@ -1,27 +1,24 @@
 // eslint-disable-next-line strict
 'use strict';
 
-const example = (arr, num) => {
-  const newArr = [];
+const findVowels = str => {
+  let count = 0;
+  const arr = [/а/g, /у/g, /е/g, /ы/g, /о/g, /э/g, /я/g, /и/g, /ю/g];
+  const newStr = str.toLowerCase();
 
   for (let i = 0; i < arr.length; i++) {
-
-    for (let j = i + 1; j < arr.length; j++) {
-
-      if ((arr[i] + arr[j]) === num) {
-        newArr.push(i, j);
-      }
-
+    if (newStr.match(arr[i])) {
+      count += newStr.match(arr[i]).length;
     }
   }
 
-  return newArr;
+  return count;
 };
 
-console.log('=> [0, 1]', example([2, 7, 11, 15], 9));
-console.log(' => [0, 3]', example([12, 24, 34, 2], 14));
-console.log('=> [1, 3]', example([2, 7, 11, 15], 22));
-
+console.log('=> 2 ', findVowels('Привет'));
+console.log(' => 5', findVowels('Абракадабра'));
+console.log('=> 8', findVowels('блаблаблаблоОООО'));
+console.log('=> 6', findVowels('ООблаблаблабло'));
 
 
 
