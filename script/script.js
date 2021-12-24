@@ -1,22 +1,38 @@
 // eslint-disable-next-line strict
 'use strict';
 
-const solution = (str, num) => {
+const solve = (str, num) => {
+  const arr = str.split('');
+  let count = 0;
 
-  let newStr = '';
+  for (let i = 0; i < str.length; i++) {
 
-  if (str.length > num) {
-    newStr = str.substring(0, num) + '...';
-  } else {
-    newStr = str;
+    const regExp = new RegExp(str[i], 'g');
+
+    if (count < num) {
+
+      str.replace(regExp, (match, val) => {
+
+        if (count < num) {
+
+          arr[val] = '';
+          count++;
+
+        }
+
+      })
+    }
   }
 
-  return newStr;
+  return arr.join('');
 };
 
-console.log('=> Tes... ', solution('Testing String', 3));
-console.log(' => Testing ...', solution('Testing String', 8));
-console.log('=> Test', solution('Test', 8));
+console.log('=> bracadabra =====', solve('abracadabra', 1));
+console.log(' => brcadabra =====', solve('abracadabra', 2));
+console.log(
+  '=> rcdbr ===', solve('abracadabra', 6));
+console.log('=> сdr (в задании ошибка написано rdr))))===', solve('abracadabra', 8));
+console.log(' => ===', solve('abracadabra', 50));
 
 
 
