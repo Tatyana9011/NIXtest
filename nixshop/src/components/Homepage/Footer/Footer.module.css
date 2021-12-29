@@ -1,0 +1,92 @@
+.button {
+  background: #4592ff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.buttonIcon:last-child {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.buttonIcon,
+.buttonPrice,
+.buttonText {
+  margin-right: 10px;
+}
+
+.card {
+  min-height: 370px;
+  padding-top: 60px;
+  padding-left: 46px;
+  padding-right: 46px;
+  padding-bottom: 80px;
+  border-radius: 10px;
+  display: block;
+}
+
+.text-light {
+  color: #fff;
+}
+
+.absolute {
+  position: relative;
+}
+
+.footer {
+  background: #8f79d4;
+  padding-top: 45px;
+  padding-bottom: 40px;
+  color: #fff;
+}
+.footerMenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.footerMenuItem:not(:last-child) {
+  margin-right: 40px;
+}
+.footerMenuLink {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+}
+.footerText {
+  color: #e7d9ff;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: "Lato", sans-serif;
+}
+.socialLink {
+  text-decoration: none;
+  margin-left: 15px;
+}
+.footerLine {
+  color: #fff;
+  opacity: 0.5;
+  size: 1px;
+}
+.topLink {
+  text-decoration: none;
+  color: #fff;
+}
+.topLinkText {
+  margin-right: 15px;
+}
+.paymentLogo {
+  vertical-align: middle;
+  margin-right: 25px;
+}

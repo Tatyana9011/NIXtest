@@ -1,0 +1,65 @@
+.header {
+  padding: 15px 0;
+}
+
+.navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.navigationLink {
+  text-decoration: none;
+  color: #939699;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.navigationLink:hover {
+  text-decoration: none;
+  color: #696b6d;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.button {
+  background: #4592ff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 4px;
+}
+.buttonIcon:last-child {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.buttonIcon,
+.buttonPrice,
+.buttonText {
+  margin-right: 10px;
+}
+
+.buttonExit {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
+}
