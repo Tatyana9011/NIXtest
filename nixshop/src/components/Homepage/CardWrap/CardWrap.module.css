@@ -1,5 +1,5 @@
 .button {
-  background: #4592ff;
+  background: #4592ff !important;
   border-radius: 20px;
   border: none;
   padding: 10px 20px;
@@ -14,6 +14,12 @@
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.3s ease;
+}
+.button:hover {
+  background: #0a58ca !important;
+  text-decoration: none;
+  color: #fff;
 }
 
 .buttonIcon:last-child {
@@ -104,37 +110,6 @@
 
 .absolute {
   position: relative;
-}
-
-.cardGrupImg {
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  background-color: transparent;
-  width: 57px;
-  padding: 0;
-  margin: 0;
-  border-radius: 5px;
-}
-
-.cardGrupImg1 {
-  background-color: transparent;
-  width: 57px;
-  height: 53px;
-}
-.cardGrupImg1:hover {
-  background-color: #fff;
-  border-radius: 5px;
-}
-
-.buttonCardGrupImg {
-  border: none;
-  padding: 0;
-  background-color: #ccd5e6;
-  border-radius: 5px;
-}
-.active {
-  background-color: #fff;
 }
 
 .sectionTitle {

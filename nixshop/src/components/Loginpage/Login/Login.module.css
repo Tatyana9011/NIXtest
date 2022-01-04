@@ -1,0 +1,23 @@
+.NavLink {
+  background: #4592ff;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 4px;
+}
+.NavLink:hover {
+  background: #0a58ca !important;
+  text-decoration: none;
+  color: #fff;
+}

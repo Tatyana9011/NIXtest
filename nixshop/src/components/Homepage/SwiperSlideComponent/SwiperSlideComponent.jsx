@@ -2,10 +2,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {Navigation} from 'swiper';
 import React from 'react';
-// Import Swiper styles
 import 'swiper/css';
 import s from './SwiperSlideComponent.module.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button} from 'react-bootstrap';
 
 
@@ -37,8 +35,7 @@ function SwiperSlideComponent (){
       </SwiperSlide>
     )
   }
-  return <React.Fragment>
-    <Swiper
+  return ( <Swiper
       className={s.slider}
       id='main' tag='section'
       navigation
@@ -47,8 +44,7 @@ function SwiperSlideComponent (){
     >
       {slides}
     </Swiper>
-
-  </React.Fragment> ;
+ );
 };
 
 export default SwiperSlideComponent;

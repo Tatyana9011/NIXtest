@@ -1,16 +1,12 @@
-  import React from 'react';
-  import CardWrap from './CardWrap/CardWrap';
-import Footer from './Footer/Footer';
-  import Head from './Head/Head';
-import Slide from './Slide/Slide';
+import React from 'react';
+import CardWrap from './CardWrap/CardWrap';
+import SwiperSlideComponent from './SwiperSlideComponent/SwiperSlideComponent';
 
   function Homepage() {
     return (
       <div>
-        <Head/>
-        <Slide />
+        <SwiperSlideComponent />
         <CardWrap />
-        <Footer/>
       </div>
     );
   }

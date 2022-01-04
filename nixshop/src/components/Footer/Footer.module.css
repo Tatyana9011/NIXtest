@@ -25,24 +25,6 @@
   margin-right: 10px;
 }
 
-.card {
-  min-height: 370px;
-  padding-top: 60px;
-  padding-left: 46px;
-  padding-right: 46px;
-  padding-bottom: 80px;
-  border-radius: 10px;
-  display: block;
-}
-
-.text-light {
-  color: #fff;
-}
-
-.absolute {
-  position: relative;
-}
-
 .footer {
   background: #8f79d4;
   padding-top: 45px;
@@ -74,14 +56,29 @@
   text-decoration: none;
   margin-left: 15px;
 }
+.socialLink:hover {
+  filter: invert(0.2);
+}
 .footerLine {
   color: #fff;
   opacity: 0.5;
   size: 1px;
+  transition: all 0.3s ease;
+}
+
+.footerMenuLink:hover {
+  color: rgb(206, 204, 204);
+  size: 2px;
 }
 .topLink {
   text-decoration: none;
   color: #fff;
+  transition: all 0.3s ease;
+}
+.topLink:hover {
+  color: rgb(206, 204, 204);
+  size: 2px;
+  filter: invert(0.9);
 }
 .topLinkText {
   margin-right: 15px;
@@ -89,4 +86,9 @@
 .paymentLogo {
   vertical-align: middle;
   margin-right: 25px;
+  transition: all 0.3s ease;
+}
+
+.paymentLogo:hover {
+  filter: invert(0.9);
 }

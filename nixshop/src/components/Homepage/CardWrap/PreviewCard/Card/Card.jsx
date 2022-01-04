@@ -1,7 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col } from 'react-bootstrap';
-import arrow from '../../../../img/arrow.svg';
-import s from '../CardWrap.module.css';
+import arrow from '../../../../../img/arrow.svg';
+import s from '../../CardWrap.module.css';
+import {NavLink} from 'react-router-dom';
 
 function Card({classWrap, classh3, textH3,classP,textP}) {
   return (
@@ -9,10 +9,10 @@ function Card({classWrap, classh3, textH3,classP,textP}) {
       <div className={classWrap}>
         <h3 className={ classh3 }>{textH3}</h3>
         <p className={classP}>{textP}</p>
-        <a href="true" className={s.button}>
-          <span className={s.buttonText}>View al</span>
+        <NavLink to="/goods" className={s.button}>
+          <span className={s.buttonText}>View all</span>
           <img src={arrow} alt="" className={s.buttonIcon}/>
-        </a>
+        </NavLink>
       </div>
     </Col>);
 }
