@@ -70,19 +70,7 @@
   color: rgb(206, 204, 204);
   size: 2px;
 }
-.topLink {
-  text-decoration: none;
-  color: #fff;
-  transition: all 0.3s ease;
-}
-.topLink:hover {
-  color: rgb(206, 204, 204);
-  size: 2px;
-  filter: invert(0.9);
-}
-.topLinkText {
-  margin-right: 15px;
-}
+
 .paymentLogo {
   vertical-align: middle;
   margin-right: 25px;

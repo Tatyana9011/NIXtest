@@ -35,7 +35,6 @@
   background: #4592ff;
   border-radius: 20px;
   border: none;
-  padding: 10px 20px;
   color: #fff;
   font-family: "Lato", sans-serif;
   font-style: normal;
@@ -46,7 +45,6 @@
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
   margin-left: 4px;
   transition: all 0.3s ease;
 }
@@ -54,6 +52,13 @@
   background: #0a58ca;
   text-decoration: none;
   color: #fff;
+  outline: transparent;
+}
+.button:focus {
+  background: #4592ff;
+  text-decoration: none;
+  color: #fff;
+  outline: transparent;
 }
 .buttonIcon:last-child {
   margin-right: 0;
@@ -61,8 +66,10 @@
 }
 .buttonIcon,
 .buttonPrice,
-.buttonText {
+.buttonText,
+.cartCount {
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .buttonExit {
@@ -75,4 +82,35 @@
 }
 .logoImage:hover {
   filter: invert(0.5);
+}
+.cartCount {
+  margin-left: 10px;
+}
+
+@media (max-width: 1200px) {
+  .cart {
+    top: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    z-index: 300;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+}
+@media (max-width: 800px) {
+  .buttonText {
+    display: none;
+  }
+  .buttonText.cartCount {
+    display: inline;
+  }
+}
+@media (max-width: 1200px) {
+  .buttonIcon,
+  .buttonPrice,
+  .buttonText,
+  .cartCount {
+    padding: 0 !important;
+  }
 }

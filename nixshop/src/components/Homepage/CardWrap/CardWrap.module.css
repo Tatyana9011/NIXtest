@@ -108,10 +108,6 @@
   color: #fff;
 }
 
-.absolute {
-  position: relative;
-}
-
 .sectionTitle {
   color: #262d33;
   font-size: 25px;
@@ -128,18 +124,23 @@
 }
 .goodsCard {
   position: relative;
+  min-height: 400px;
+  max-height: 400px;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 20%;
+  margin-bottom: 10px;
   padding-bottom: 35px;
   padding-left: 35px;
-  padding-bottom: 35px;
+  border: 1px solid #838485;
+  border-radius: 5%;
+  box-shadow: 4px 4px rgb(192, 190, 190);
   text-decoration: none;
   display: block;
 }
 .goodsCard .label {
   position: absolute;
-  left: 18px;
-  top: 18px;
+  right: 40px;
+  top: 2%;
 }
 .goodsTitle {
   color: #262d33;
@@ -161,4 +162,37 @@
   font-size: 18px;
   line-height: 30px;
   font-family: "Lato", sans-serif;
+}
+.goodsImage {
+  object-fit: contain;
+  height: 190px;
+}
+.labelGoodsCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1200px) {
+  .card3 {
+    background-size: cover;
+  }
+}
+@media (max-width: 800px) {
+  .goodsCard .label {
+    position: absolute;
+    right: 30px;
+    top: 2%;
+  }
+}
+
+@media (max-width: 576px) {
+  .cord {
+    background-position: left top;
+    padding: 30px;
+    min-height: 300px;
+  }
+  .cord4 {
+    background-position: right top;
+  }
 }

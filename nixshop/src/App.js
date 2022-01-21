@@ -7,22 +7,67 @@ import Homepage from './components/Homepage/Homepage';
 import { Provider, connect } from 'react-redux';
 import GoodsPage from "./components/GoodsPage/GoodsPage";
 import Login from "./components/Loginpage/Login/Login";
-import store from "./store/reduxStore";
+import store from "./store/reducer/reduxStore";
+import {
+  getGoodsThunkCreator,
+  authorizationThunkCreator,
+  loginOutThunkCreator,
+  loginThunkCreator
+} from './store/effects';
+import { showBtn, hideBtn, hideModal, setAuthUserData } from './store/actions';
+import { withSuspense } from './hoc/withSuspense';
+import CartContainer from './components/Cart/CartContainer';
+import TopButton from './components/TopButton/TopButton';
+import { getDataStorage } from './components/Functions/secondaryFunction';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  handleScroll() {
+    if (window.pageYOffset >= 300) {
+      this.props.showBtn();
+    } else {
+      this.props.hideBtn();
+    }
+  }
+  escapeHandler(event) {
+    if (event.code === 'Escape') {
+      this.props.hideModal();
+    }
+  }
+
   catchAllUnhandledErrors = (reason, promise) => {
-    alert("some error occured")
-    console.log(reason, promise);
+    console.log("catchAllUnhandledErrors ....some error occured");
     //нужна санка и в апп-редьюсер добавить глобальную ошибку и диспачить санку
   }
+
   componentDidMount() {
-    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+    const pass = getDataStorage('pass');
+    const login = getDataStorage('login');
+    this.props.getGoodsThunkCreator();
+    if (pass && login) {
+      this.props.loginThunkCreator(pass, login);
+    } else {
+      this.props.setAuthUserData(null, null, null, false);
+    }
+    //this.props.authorizationThunkCreator('email1', 'pass1', 'login1');
+    //this.props.loginOutThunkCreator('eKyNTlD');
+
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    window.addEventListener('keydown', this.escapeHandler.bind(this));
+    window.addEventListener('scroll', this.handleScroll);
   }
+
   /*  делаем отписку от прослушивания псле того как компонента умерла */
   componentWillUnmount() {
-    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+    window.removeEventListener('keydown', this.escapeHandler.bind(this));
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
   }
   render() {
+
     return (
       <BrowserRouter>
         <HeadContainer />
@@ -30,10 +75,12 @@ class App extends React.Component {
           <Route exact path='/' render={() => <Redirect to={'/home'} />} />
           <Route path='/home' render={() => < Homepage />} />
           <Route path='/login' render={() => <Login />} />
-          <Route path='/goods' render={() => <GoodsPage />} />
+          <Route path='/goods/:category?' render={withSuspense(GoodsPage)} />
           <Route path='/*' render={() => <div> 404 NOT FOUND</div>} />
         </Switch>
         <Footer />
+        <CartContainer />
+        <TopButton />
       </BrowserRouter >
     )
   }
@@ -41,12 +88,26 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  isAuth: state.login.isAuth
+  logonIn: state.isAuth.logonIn,
+  goods: state.goods.goods
 })
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    showBtn: () => dispatch(showBtn()),
+    hideBtn: () => dispatch(hideBtn()),
+    hideModal: () => dispatch(hideModal()),
+    setAuthUserData: (usersId, login, pass, logonIn) => dispatch(setAuthUserData(usersId, login, pass, logonIn)),
+    getGoodsThunkCreator: () => dispatch(getGoodsThunkCreator()),
+    authorizationThunkCreator: (email, pass, login) => dispatch(authorizationThunkCreator(email, pass, login)),
+    loginOutThunkCreator: (id) => dispatch(loginOutThunkCreator(id)),
+    loginThunkCreator: (pass, login) => dispatch(loginThunkCreator(pass, login))
+  }
+}
 
 let AppContainer = compose(
   withRouter,
-  connect(mapStateToProps, { store })
+  connect(mapStateToProps, mapDispatchToProps)
 )(App);
 
 const NixShop = (props) => {

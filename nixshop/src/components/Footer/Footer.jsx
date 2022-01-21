@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import s from './Footer.module.css';
@@ -13,8 +12,8 @@ import Instagram from "../../img/Instagram.svg";
 
 function Footer() {
   return (
-    <footer className={s.footer}>
-      <Container>
+    <footer className={`${s.footer}`}>
+      <Container >
         <Row>
           <div className="col-xl-7 mb-4 mb-xl-0">
             <Nav>
@@ -48,12 +47,7 @@ function Footer() {
             <img className={s.paymentLogo} src={PayPal} alt="PayPal"/>
             <img className={s.paymentLogo} src={bitcoin} alt="bitcoin"/>
           </div>
-          <div className="col-lg-2 col-sm-3 d-flex justify-content-end">
-            <a href="/" className={`${s.topLink} d-flex align-items-center`}>
-              <span className={s.topLinkText}>Top</span>
-              <img src={top} alt="top"/>
-            </a>
-          </div>
+
         </Row>
       </Container>
     </footer>

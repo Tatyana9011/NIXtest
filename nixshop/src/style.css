@@ -39,41 +39,7 @@ figcaption {
   padding: 0;
   margin: 0;
 }
-.button {
-  background: #4592ff;
-  border-radius: 20px;
-  border: none;
-  padding: 10px 20px;
-  color: #fff;
-  font-family: "Lato", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 14px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-}
-.button-icon:last-child {
-  margin-right: 0;
-  margin-left: 10px;
-}
-.button-icon,
-.button-price,
-.button-text {
-  margin-right: 10px;
-}
 
-.label {
-  font-size: 12px;
-  padding: 5px 12px;
-  background-color: #3dc47e;
-  border-radius: 3px;
-  color: wheat;
-  line-height: 15px;
-}
 #app {
   height: 100%;
 }
@@ -84,7 +50,7 @@ body {
 }
 
 body {
-  background: #eee;
+  background: #fff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
@@ -123,11 +89,6 @@ body {
   object-fit: cover;
 }
 
-.slider-Button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
 .swiper-button-prev {
   margin-left: 10%;
   cursor: pointer;
@@ -138,12 +99,6 @@ body {
 }
 
 @media (max-width: 1200px) {
-  .slide-1 {
-    background-size: cover;
-  }
-  .card-3 {
-    background-size: cover;
-  }
   .swiper-button-prev {
     margin-left: 0;
     cursor: pointer;
@@ -152,28 +107,7 @@ body {
     margin-right: 0;
     cursor: pointer;
   }
-}
-
-@media (max-width: 992px) {
-  .slider-nav {
-    display: none;
-  }
-}
-@media (max-width: 576px) {
-  .slide-title {
-    font-size: 36px;
-    line-height: 1.4;
-    margin-bottom: 0;
-  }
-  .cord {
-    background-position: left top;
-    padding: 30px;
-    min-height: 300px;
-  }
-  .cord-4 {
-    background-position: right top;
-  }
-  .card-grup-img {
-    display: none;
+  .nav-link {
+    padding: 10px !important;
   }
 }

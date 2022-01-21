@@ -4,11 +4,9 @@ import SwiperCore, {Navigation} from 'swiper';
 import React from 'react';
 import 'swiper/css';
 import s from './SwiperSlideComponent.module.css';
-import { Container, Row, Col, Button} from 'react-bootstrap';
-
-
-
-
+import { Container, Row, Col} from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import arrow from '../../../img/arrow.svg';
 SwiperCore.use([Navigation]);
 
 function SwiperSlideComponent (){
@@ -24,10 +22,10 @@ function SwiperSlideComponent (){
 							<span className={s.label}>Bestseller</span>
 							<h2 className={s.slideTitle}>Women's Alpargata Loafer</h2>
 							<p className={s.slideDescription}>At Alpa believe in a better tomorrow, one where humanity thrives.</p>
-                <Button className={s.button} id="add-to-cart" data-id={`${i+1}00`}>
-								<span className={s.buttonPrice}>$219</span>
-                <span className={s.buttonText}>Shop now</span>
-              </Button>
+              <NavLink to="/goods?category=Bestseller" className={s.button}>
+                  <span className={s.buttonText}>View all</span>
+                   <img src={arrow} alt="" className={s.buttonIcon}/>
+              </NavLink>
 						</Col>
 					</Row>
 				</Container>
