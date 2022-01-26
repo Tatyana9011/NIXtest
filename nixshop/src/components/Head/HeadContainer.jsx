@@ -1,22 +1,23 @@
 
 import React from 'react';
-//import { compose } from 'redux';
 import { connect } from 'react-redux';
-//import  { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import Head from './Head';
-import { showModal, authOutUserRememberMy } from '../../store/actions';
+import { showModal, authOutUserRememberMy, setFilterGoodsData } from '../../store/actions';
 
 const HeadContainer = (props) => {
 
   return (
     <div>
       <Head
+        values={props.values}
         btnDisplayNone={props.btnDisplayNone}
-        logonIn={props.logonIn}
+        loginIn={props.loginIn}
         showModal={props.showModal}
         count={props.dataCartGoods.length}
         btnShow={props.btnShow}
         authOutUserRememberMy={props.authOutUserRememberMy}
+        props={props}
+        setFilterGoodsData={props.setFilterGoodsData}
       />
     </div>)
 
@@ -24,14 +25,16 @@ const HeadContainer = (props) => {
 
 const mapStateToProps = (state) => ({
   btnDisplayNone: state.isAuth.btnDisplayNone,
-  logonIn: state.isAuth.logonIn,
+  loginIn: state.isAuth.loginIn,
   dataCartGoods: state.goods.dataCartGoods,
-  btnShow:state.cart.btnTopShow,
+  btnShow: state.cart.btnTopShow,
+  values:state.goods.values,
 });
 const mapDispatchToProps = (dispatch) => {
   return {
     showModal: () => dispatch(showModal()),
-    authOutUserRememberMy: () => dispatch(authOutUserRememberMy())
+    authOutUserRememberMy: () => dispatch(authOutUserRememberMy()),
+    setFilterGoodsData: (filter,values) => dispatch(setFilterGoodsData(filter,values))
   }
 }
 

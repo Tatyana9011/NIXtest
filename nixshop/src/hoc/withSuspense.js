@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
-import Preloder from '../components/comon/Preloder/Preloder';
+import Louder from '../components/comon/Louder/Louder';
 
 
 export const withSuspense = (Component) => {
   return (props) => {
-    return <Suspense fallback={<Preloder />}>
+    return <Suspense fallback={<Louder />}>
       <Component {...props} />
     </Suspense>
   }

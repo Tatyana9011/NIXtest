@@ -1,8 +1,6 @@
 import preloader from '../../../img/preloader.svg';
 
-
-
-const Preloder = () => {
+const Louder = () => {
   return (<div>
     <img alt='preloder' style={{
       position: 'absolute',
@@ -11,4 +9,4 @@ const Preloder = () => {
     }} src={preloader} />
   </div>)
 }
-export default Preloder
+export default Louder

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import s from './Paginator.module.css';
 
-
-let Paginator = ({ currentPage, totalItemsCount, pageSize, onPageChanged, portionSize = 8 }) => {
-    let pagesCount = Math.ceil(totalItemsCount / pageSize);
+//currentPage-текущая страница
+let Paginator = ({ currentPage, totalItemsCount, pageSize, onPageChanged, portionSize = 2 }) => {
+    let pagesCount = Math.ceil(totalItemsCount / pageSize); //узнаем сколько станиц вообще
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-
+    //portionSize сколько страниц отобажать юзеру
     let portionCount = Math.ceil(pagesCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
@@ -27,7 +27,8 @@ let Paginator = ({ currentPage, totalItemsCount, pageSize, onPageChanged, portio
                     })
             }
             {portionCount > portionNumber &&
-                <button onClick={() => { setPortionNumber(portionNumber + 1) }} className={s.userButtonNext}></button>}
+                <button onClick={() => { setPortionNumber(portionNumber + 1) }} className={s.userButtonNext}></button>
+            }
         </div>
     )
 }

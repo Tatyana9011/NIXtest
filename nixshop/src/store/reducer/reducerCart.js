@@ -7,9 +7,9 @@ import {
 
 
 let initialState = {
-  show: false,
-  goodsCart: [],
-  btnTopShow: false
+  show: false, //показывать значек корзины в шапке
+  goodsCart: [],  //казина товаров
+  btnTopShow: false   //кнопка для скола показывать при покрутке в низ на 300 
 }
 
 const reducerCart = (state = initialState, action) => {

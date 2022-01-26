@@ -7,9 +7,12 @@ import s from './SwiperSlideComponent.module.css';
 import { Container, Row, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import arrow from '../../../img/arrow.svg';
+import { useDispatch} from 'react-redux';
+import { setFilterGoodsData } from "../../../store/actions";
 SwiperCore.use([Navigation]);
 
-function SwiperSlideComponent (){
+function SwiperSlideComponent() {
+  const dispatch = useDispatch();
   const slides = [];
   
   for (let i = 0; i < 3; i++){
@@ -22,10 +25,12 @@ function SwiperSlideComponent (){
 							<span className={s.label}>Bestseller</span>
 							<h2 className={s.slideTitle}>Women's Alpargata Loafer</h2>
 							<p className={s.slideDescription}>At Alpa believe in a better tomorrow, one where humanity thrives.</p>
-              <NavLink to="/goods?category=Bestseller" className={s.button}>
-                  <span className={s.buttonText}>View all</span>
-                   <img src={arrow} alt="" className={s.buttonIcon}/>
-              </NavLink>
+                <NavLink onClick={() => dispatch(setFilterGoodsData('label', "Bestseller"))}
+                  to="/goods?category=Bestseller"
+                     className={s.button}>
+                    <span className={s.buttonText}>View all</span>
+                    <img src={arrow} alt="" className={s.buttonIcon}/>
+                </NavLink>
 						</Col>
 					</Row>
 				</Container>

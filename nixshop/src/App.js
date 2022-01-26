@@ -9,9 +9,8 @@ import GoodsPage from "./components/GoodsPage/GoodsPage";
 import Login from "./components/Loginpage/Login/Login";
 import store from "./store/reducer/reduxStore";
 import {
-  getGoodsThunkCreator,
+  getGoodsFilterThunkCreator,
   authorizationThunkCreator,
-  loginOutThunkCreator,
   loginThunkCreator
 } from './store/effects';
 import { showBtn, hideBtn, hideModal, setAuthUserData } from './store/actions';
@@ -19,6 +18,7 @@ import { withSuspense } from './hoc/withSuspense';
 import CartContainer from './components/Cart/CartContainer';
 import TopButton from './components/TopButton/TopButton';
 import { getDataStorage } from './components/Functions/secondaryFunction';
+import Louder from './components/comon/Louder/Louder';
 
 class App extends React.Component {
   constructor() {
@@ -44,17 +44,19 @@ class App extends React.Component {
     //нужна санка и в апп-редьюсер добавить глобальную ошибку и диспачить санку
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.didInvalidate !== prevProps.didInvalidate) {
+
+    }
+  }
   componentDidMount() {
     const pass = getDataStorage('pass');
     const login = getDataStorage('login');
-    this.props.getGoodsThunkCreator();
     if (pass && login) {
       this.props.loginThunkCreator(pass, login);
     } else {
       this.props.setAuthUserData(null, null, null, false);
     }
-    //this.props.authorizationThunkCreator('email1', 'pass1', 'login1');
-    //this.props.loginOutThunkCreator('eKyNTlD');
 
     window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     window.addEventListener('keydown', this.escapeHandler.bind(this));
@@ -66,15 +68,19 @@ class App extends React.Component {
     window.removeEventListener('keydown', this.escapeHandler.bind(this));
     window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
   }
-  render() {
 
+  render() {
+    if (this.props.didInvalidate) {
+      return <Louder />
+    }
     return (
       <BrowserRouter>
         <HeadContainer />
+        {this.props.didInvalidate ? <Louder /> : ''}
         <Switch>
           <Route exact path='/' render={() => <Redirect to={'/home'} />} />
           <Route path='/home' render={() => < Homepage />} />
-          <Route path='/login' render={() => <Login />} />
+          <Route path='/login' render={withSuspense(Login)} />
           <Route path='/goods/:category?' render={withSuspense(GoodsPage)} />
           <Route path='/*' render={() => <div> 404 NOT FOUND</div>} />
         </Switch>
@@ -88,8 +94,9 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  logonIn: state.isAuth.logonIn,
-  goods: state.goods.goods
+  loginIn: state.isAuth.loginIn,
+  goods: state.goods.goods,
+  didInvalidate: state.isAuth.didInvalidate,
 })
 
 let mapDispatchToProps = (dispatch) => {
@@ -97,10 +104,9 @@ let mapDispatchToProps = (dispatch) => {
     showBtn: () => dispatch(showBtn()),
     hideBtn: () => dispatch(hideBtn()),
     hideModal: () => dispatch(hideModal()),
-    setAuthUserData: (usersId, login, pass, logonIn) => dispatch(setAuthUserData(usersId, login, pass, logonIn)),
-    getGoodsThunkCreator: () => dispatch(getGoodsThunkCreator()),
+    setAuthUserData: (usersId, login, pass, loginIn) => dispatch(setAuthUserData(usersId, login, pass, loginIn)),
+    getGoodsFilterThunkCreator: (pageSize, currentPage, filter, value) => dispatch(getGoodsFilterThunkCreator(pageSize, currentPage, filter, value)),
     authorizationThunkCreator: (email, pass, login) => dispatch(authorizationThunkCreator(email, pass, login)),
-    loginOutThunkCreator: (id) => dispatch(loginOutThunkCreator(id)),
     loginThunkCreator: (pass, login) => dispatch(loginThunkCreator(pass, login))
   }
 }

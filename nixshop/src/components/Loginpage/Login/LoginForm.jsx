@@ -10,34 +10,37 @@ const login15 = maxLengthCreator(15);
 
 const email100 = maxLengthCreator(100);
 
-const LoginForm = ({handleSubmit, message, rememberMe, loginIn, authUserRememberMy, usersId, loginOutThunkCreator,removeUserData}) => {
-  console.log('loginIn: ', loginIn);
-                  //render={() => <Redirect to={'/home'} />}
+const LoginForm = ({ handleSubmit,
+  message,style, rememberMe,
+  loginIn, authUserRememberMy,
+  authSetLoginInOut,
+  removeUserData, setFilterGoodsData }) => {
+
   return (
     <Container>
       <Col className='col-lg-4 col-10 offset-lg-3 mt-4 mb-4'>
+        <Form.Group className="mb-3" controlId="Mass">
+           <Form.Label style={style}>{message}</Form.Label>
+        </Form.Group>
         {loginIn ? <>
           <p  className={s.tweetFormSubtitle}>Вы авторизиованны, если хотите выйти<Nav.Link onClick={()=>removeUserData()}className={`${s.NavLink} nav-link`}>Exit</Nav.Link>
           </p>
-          <p  className={s.tweetFormSubtitle}> Для удаления с базы <Nav.Link onClick={()=>loginOutThunkCreator(usersId)}className={`${s.Delete} nav-link`}>Delete</Nav.Link>
+          <p  className={s.tweetFormSubtitle}>Вернутся на главную<NavLink to="/home" onClick={()=>setFilterGoodsData('label', "New")} className={`${s.NavLink} nav-link`}>Home</NavLink>
+          </p>
+          <p className={s.tweetFormSubtitle}> Для удаления с базы <Nav.Link onClick={() => authSetLoginInOut()} className={`${s.Delete} nav-link`}>Delete</Nav.Link>
           </p>
         </> :
           <>{!rememberMe ?
               <>
                 <h2 className={s.tweetFormTitle}>Введите логин и пароль</h2>
-                <p  className={s.tweetFormError}>Что-то пошло не так</p>
                 <p  className={s.tweetFormSubtitle}>Если у вас нет логина, пройдите <Nav.Link className={`${s.button} nav-link`} onClick={()=>authUserRememberMy()}>регистрацию</Nav.Link>
                 </p>
               </> :
               <>
                 <h2 className={s.tweetFormTitle}>Регистрация</h2>
-                <div  className={s.tweetFormError}>Что-то пошло не так</div>
               </>
             }
             <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="Mass">
-                <Form.Label className={s.message}>{message}</Form.Label>
-              </Form.Group>
               {rememberMe ?
                 <Form.Group className="mb-3" controlId="Email">
                   <Form.Label>Email address</Form.Label>
@@ -70,16 +73,13 @@ const LoginForm = ({handleSubmit, message, rememberMe, loginIn, authUserRemember
             </Form>
         </>
         }
-        
       </Col>
     </Container>
   )
-
 }
 
 const LoginReduxForm = reduxForm({
   form: 'login'
 })(LoginForm)
-
 
 export default LoginReduxForm;

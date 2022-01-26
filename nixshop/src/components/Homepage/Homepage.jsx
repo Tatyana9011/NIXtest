@@ -1,12 +1,12 @@
 import React from 'react';
-import CardWrap from './CardWrap/CardWrap';
+import CardWrapContainer from './CardWrap/CardWrapContainer';
 import SwiperSlideComponent from './SwiperSlideComponent/SwiperSlideComponent';
 
   function Homepage() {
     return (
       <div>
         <SwiperSlideComponent />
-        <CardWrap />
+        <CardWrapContainer />
       </div>
     );
   }

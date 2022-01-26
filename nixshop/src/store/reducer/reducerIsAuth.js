@@ -4,29 +4,32 @@ import {
   FETCH_POSTS_FAILURE,
   AUTH_USER_REMEMBER_MY,
   AUTH_OUT_USER_REMEMBER_MY,
-  SET_MESSAGE
+  SET_MESSAGE,
+  SET_IS_FETCHING,
+  SET_LOGIN_IN_OUT,
+  SET_BTN_TOGL_HEDER_LOGIN
 } from "../types";
 
 let initialState = {
   usersId: null,
   login: null,
   pass: null,
-  rememberMe: false,
-  loginIn: true,
-  btnDisplayNone: false, //
-  message: '', //сообщение
-  messageStyle: {}, //рендерим стили к сообщению
+  email: null,
+  rememberMe: false, //если пользователь не хочет авторизоваться (или уже есть акаунт )
+  loginIn: false, //для повеки залогинен юзер или нет
+  loginInOut: false, //для состояния что юзер хочет отпавить свои данные в формме
+  btnDisplayNone: false, //скываем кнопкок в шапке зависит на какой станице находимся
+  message: '', //сообщение об успехе или об ошибке
+  messageStyle: { color: 'blue' }, //рендерим стили к сообщению
   didInvalidate: false, //показываем лоудер
-  fetchedPageCount: 1, //станица запоса
-  isFetching: false, //запоса позитивный или негативный
+  isFetching: false, //юзер нажал на кнопку авторизации или отправки логина
+  formData: null,
 }
-
 
 const headReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
-      return Object.assign({}, state, {
-        isFetching: false,  //пишол позитивный ответ от сервера 
+      return Object.assign({}, state, { //дата получена
         didInvalidate: false, // скрываем лоудер
         ...action.data
       });
@@ -35,27 +38,41 @@ const headReducer = (state = initialState, action) => {
         message: action.message,
         messageStyle: action.style,
       });
+    case SET_BTN_TOGL_HEDER_LOGIN:
+      return Object.assign({}, state, {
+        btnDisplayNone: action.btnDisplayNone,
+      });
+    case SET_LOGIN_IN_OUT:
+      return Object.assign({}, state, {
+        loginInOut: false,
+      });
+    case SET_IS_FETCHING:
+      return Object.assign({}, state, {
+        isFetching: true,
+        formData: action.formData
+      });
     case AUTH_USER_REMEMBER_MY:
       return Object.assign({}, state, {
         rememberMe: true  //если пользователь хочет авторизоваться
       })
     case AUTH_OUT_USER_REMEMBER_MY:
       return Object.assign({}, state, {
-        rememberMe: false  //если пользователь не хочет авторизоваться (или уже есть акаунт )
+        rememberMe: false  //пользователь хочет акаунт (или уже есть акаунт )
       });
     case FETCH_POSTS_FAILURE:
       return Object.assign({}, state, {
-        didInvalidate: true  //запрос прошол показываем лоудер
+        didInvalidate: false, //лоуде скрываем
+        message: action.error,  //записываем ошибку
+        messageStyle: { color: 'red' }//добавляем стили сообщению
       })
     case FETCH_POSTS_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true,   //пришол негативный ответ от севера
-        didInvalidate: false //лоуде скрываем
+        didInvalidate: false,  //запрос прошол показываем лоудер
+        isFetching: false,
       });
     default:
       return state;
   }
 }
-//window.store.getState().login
 
 export default headReducer;

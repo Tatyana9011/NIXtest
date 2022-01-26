@@ -1,13 +1,14 @@
 import * as axios from 'axios';
 
-
+//--no-cors
 const instence = axios.create({
-  baseURL:'http://localhost:5050',
-
+  baseURL: 'http://localhost:5050',
+  /* headers: {
+    'Access-Control-Expose-Headers' : 'X-Total-Count'
+  } */
 });
 
 export const authAPI = {
-
   login(pass, login) {
     return (
       instence.get(`/users?login=${login}&pass=${pass}`)
@@ -27,28 +28,12 @@ export const authAPI = {
   },
 }
 
-
-export const goodsAPI = async (pageSize=8, currentPage=1) => { 
- const response = await fetch(`http://localhost:5050/goods?_page=${currentPage}&_limit=${pageSize}`);
-  if (!response.ok) {
-    throw 'Ошибочка вышла' + response.status; 
-  }
-  return response.json();
-}
-
-export const goodsPageFilterAPI = async (pageSize=8, currentPage=1, filter,value) => { 
- const response = await fetch(`http://localhost:5050/goods?${filter}=${value}&_page=${currentPage}&_limit=${pageSize}`);
-  if (!response.ok) {
-    throw 'Ошибочка вышла' + response.status; 
-  }
-  return response.json();
-}
-
-export const goodsTotalCountAPI = async () => { 
- const response = await fetch('http://localhost:5050/totalCount');
-  if (!response.ok) {
-    throw 'Ошибочка вышла' + response.status;  //какая ошибка 
-  }
-  return response.json();
+export const goodsAPI = {
+  goodsAll(pageSize, page) { 
+    return instence.get(`/goods?_page=${page}&_limit=${pageSize}`);
+  },
+  goodsPageFilterAPI(pageSize, page, filter, value) {
+    return instence.get(`/goods?${filter}=${value}&_page=${page}&_limit=${pageSize}`);
+  },
 }
 

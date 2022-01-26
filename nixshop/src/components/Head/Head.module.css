@@ -48,6 +48,10 @@
   margin-left: 4px;
   transition: all 0.3s ease;
 }
+.active {
+  text-decoration: underline;
+  text-decoration: cornflowerblue;
+}
 .button:hover {
   background: #0a58ca;
   text-decoration: none;

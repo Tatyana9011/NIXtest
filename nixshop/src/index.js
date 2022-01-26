@@ -7,9 +7,7 @@ import "swiper/css/bundle";
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <NixShop />
-  </React.StrictMode>,
+  <NixShop />,
   document.getElementById('root')
 );
 

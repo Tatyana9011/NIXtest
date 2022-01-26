@@ -4,35 +4,40 @@ import {
   ADD_GOOD_CART,
   CLEAR_ALL_GOODS_CART,
   DECREMENT_COUNT,
+  SET_FILTER_GOODS_DATA,
+  SET_CURRENT_PAGE,
 } from '../types';
 
 let initialState = {
   goods: [],
-  goodsNew: [],
-  Bestseller: [],
-  Clothing: [],
-  Shoes: [],
-  Accessories: [],
-  Womens: [],
-  Mens: [],
+  currentPage: 1,
+  pageSize: 8,
+  totalCount: [],
+  totalCountFilterData: [],
+  filter: "",
+  values: "",
   dataCartGoods: []
 }
 
 const reducerGoods = (state = initialState, action) => {
   switch (action.type) {
+    case SET_FILTER_GOODS_DATA:
+      return Object.assign({}, state,
+        {
+          filter: action.filter,
+          values: action.values
+        });
+    case SET_CURRENT_PAGE:
+      return Object.assign({}, state,
+        {
+          currentPage: action.currentPage,
+        });
     case SET_GOODS_DATA:
       return Object.assign({}, state,
         {
           goods: action.data,
-          goodsNew: action.data.filter(good => good["label"] === "New"),
-          Bestseller: action.data.filter(good => good["label"] === "Bestseller"),
-          Clothing: action.data.filter(good => good["category"] === "Clothing"),
-          Shoes: action.data.filter(good => good["category"] === "Shoes"),
-          Accessories: action.data.filter(good => good["category"] === "Accessories"),
-          Womens: action.data.filter(good => good["gender"] === "Womens"),
-          Mens: action.data.filter(good => good["gender"] === "Mens"),
+          totalCount: action.totalCount
         });
-
     case DELETE_GOOD_CART:
       return Object.assign({}, state,
         { dataCartGoods: [...state.dataCartGoods.filter(item => item.id !== action.id)] }

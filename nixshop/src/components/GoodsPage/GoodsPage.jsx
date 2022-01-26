@@ -1,40 +1,87 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import CardGood from '../Homepage/CardWrap/CardGood';
-import { useSelector } from 'react-redux';
+import CardGood from '../CardGood/CardGood';
+import { getGoodsFilterThunkCreator } from '../../store/effects';
+import { setFilterGoodsData } from '../../store/actions';
 import Paginator from '../comon/Paginator/Paginator';
 import { countGoodsCart } from '../Functions/secondaryFunction';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-function GoodsPage(props) {
-  const filter = props.history.location.search.substring(10);
-  let cardGoodsElem = [];
-  const cardGoods = useSelector(state => state.goods[filter]);
-  const dataCartGoods = useSelector(state => state.goods.dataCartGoods);
 
-  for (let i = 0; i < cardGoods.length; i++){
-      cardGoodsElem.push(
-        <CardGood id={ cardGoods[i].id} key={`${cardGoods[i].id}`} src={`http://localhost:3000/db/${cardGoods[i].img}`}
-          title={cardGoods[i].name} countGoods={countGoodsCart(dataCartGoods, cardGoods[i].id) }descreption={cardGoods[i].description} price={cardGoods[i].price} newGood={cardGoods[i].label} />
-      )
-  }
- const onPageChanged = (pageNamber) => {
-    let { getUsersThunkCreator, pageSize } = this.props;
-    getUsersThunkCreator(pageNamber, pageSize);
+class GoodsPage extends React.Component {
+  constructor() {
+    super();
+    this.onPageChanged = this.onPageChanged.bind(this);
   }
 
+  onPageChanged (pageNumber) {
+    const { pageSize, filter, values } = this.props;
+    this.props.getGoodsFilterThunkCreator(pageSize, pageNumber, filter, values);
+  }
+  componentDidMount() {
+    const { currentPage, pageSize, filter, values } = this.props;
+    this.props.getGoodsFilterThunkCreator( pageSize, currentPage, filter, values);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.filter !== prevProps.filter ||
+      this.props.values !== prevProps.values) {
+      const { currentPage, pageSize, filter, values } = this.props;
+      this.props.getGoodsFilterThunkCreator( pageSize, currentPage, filter, values);
+    }
+  }
+  
+  render() {
     return (
       <Container className="special-offers  pb-4 ">
         <Row>
-          {cardGoodsElem}
+          {
+            this.props.cardGoods.map(card =>{
+              return (<CardGood
+                key={card.id} 
+                id={card.id}
+                src={`http://localhost:3000/db/${card.img}`}  
+                title={card.name}
+                countGoods={countGoodsCart(this.props.dataCartGoods, card.id)}
+                descreption={card.description}
+                price={card.price}
+                newGood={card.label}
+              />)
+            })
+          }
         </Row>
-        <Paginator currentPage={1}
-          totalItemsCount={cardGoods.length}
-          pageSize={8}
-          onPageChanged={onPageChanged}
+        <Paginator currentPage={this.props.currentPage}
+          totalItemsCount={this.props.totalCount}
+          pageSize={this.props.pageSize}
+          onPageChanged={this.onPageChanged}
          />
       </Container>
     );
+  }
 }
 
 
-export default GoodsPage;
+const mapStateToProps = (state) => ({
+  dataCartGoods: state.goods.dataCartGoods,
+  currentPage: state.goods.currentPage,
+  pageSize: state.goods.pageSize,
+  filter: state.goods.filter,
+  cardGoods: state.goods.goods,
+  totalCount: state.goods.totalCount,
+  values: state.goods.values,
+})
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    getGoodsFilterThunkCreator: (pageSize, currentPage, filter, value) => dispatch(getGoodsFilterThunkCreator(pageSize, currentPage, filter, value)),
+    setFilterGoodsData:(filter)=>dispatch(setFilterGoodsData(filter))
+  }
+}
+
+const GoodsPageContainer = compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+  )(GoodsPage);
+  
+export default GoodsPageContainer;

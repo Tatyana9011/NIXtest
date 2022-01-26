@@ -7,13 +7,35 @@ export const totalPriceItems = order => {
   const priceTopping = (order.price * 0.1) * countTopping;
   return (order.price + priceTopping) * order.count;
 };
-export const validateFormData = formData => {
 
-  if (formData.pass === formData.pass2) {
-    return true
+export const validateFormData = (formData, setMessage, user) => {
+  if (formData.email && formData.pass && formData.pass2 && formData.login) {
+    if (formData.pass !== formData.pass2) {
+      setMessage('Пароли не совпадают', { color: 'red' });
+      return false;
+    }
+    if (user !== null) {
+      setMessage('Пользователь с таким логином или паролем уже существует!', { color: 'red' });
+      return false;
+    }
+    if (!formData.pass.trim() || !formData.login.trim()) {
+      setMessage('Поле с логином или паролем не может быть пустым', { color: 'red' });
+      return false;
+    }
+    return true;
+  } else if (formData.pass && formData.login && !formData.email && !formData.pass2) {
+    if (!formData.pass.trim() || !formData.login.trim()) {
+      setMessage('Поле с логином или паролем не может быть пустым', { color: 'red' });
+      return false;
+    }
+    if (user === null) {
+      setMessage('Пользователь не найден', { color: 'red' });
+      return false;
+    }
+    return true;
   }
-  return true;
 }
+
 export const countGoodsCart = (data, id) => {
   let count = 0;
   if (data.length) {
