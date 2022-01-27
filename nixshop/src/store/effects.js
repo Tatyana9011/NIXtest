@@ -9,13 +9,15 @@ import { saveDataJSON, removeDataStorage } from '../components/Functions/seconda
 export const loginThunkCreator = (pass, login) => async (dispatch) => {
   dispatch(fetchPostsRequest());
   let response = await authAPI.login(pass, login);
-  if (response.statusText === 'OK') {
-    saveDataJSON('pass', response.data[0].pass);
-    saveDataJSON('login', response.data[0].login);
-    dispatch(setAuthUserData(response.data[0].id, response.data[0].login, response.data[0].pass, true));
-  } else {
-    dispatch(fetchPostsFailure(response.statusText));
-  }
+  setTimeout(() => {
+    if (response.statusText === 'OK') {
+      saveDataJSON('pass', response.data[0].pass);
+      saveDataJSON('login', response.data[0].login);
+      dispatch(setAuthUserData(response.data[0].id, response.data[0].login, response.data[0].pass, true));
+    } else {
+      dispatch(fetchPostsFailure(response.statusText));
+    }
+  }, 500);
 }
 
 export const userGetThunkCreator = (pass, login) => async (dispatch) => {
