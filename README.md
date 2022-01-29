@@ -1,4 +1,4 @@
-# NIXtest 
+# NIXtest ветка ниже redux-toolkit + TypeScript
 Практика React JS.  - Это ченовой вариант, в следубщей ветке оригинал с redux-toolkit + TypeScript
 
 В рамках практики по React JS нужно написать интернет-магазин с использованием React + Redux + TypeScript.
