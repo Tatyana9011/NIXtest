@@ -1,5 +1,5 @@
-# NIXtest
-Практика React JS.
+# NIXtest 
+Практика React JS.  - Это ченовой вариант, в следубщей ветке оригинал с redux-toolkit + TypeScript
 
 В рамках практики по React JS нужно написать интернет-магазин с использованием React + Redux + TypeScript.
 План работы над проектом:
